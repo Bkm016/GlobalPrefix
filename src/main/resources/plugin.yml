@@ -1,0 +1,7 @@
+name: GlobalPrefix
+version: 1.0-SKYRELOAD
+main: me.zhanshi123.globalprefix.GlobalPrefix
+softdepend: [PlaceholderAPI]
+authors: [Soldier]
+commands:
+  gp:

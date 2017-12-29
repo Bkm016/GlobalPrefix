@@ -1,0 +1,37 @@
+MySQL:
+  url: localhost
+  port: 3306
+  user: root
+  password: ''
+  database: test
+  table: globalprefix
+
+Settings:
+  ConsoleUpdateFeedback: true
+
+Messages:
+  loaded: '&6&lGlobalPrefix &8> &a插件已载入'
+  placeholder:
+    notfound: '&6&lGlobalPrefix &8> &7尚未发现 PlaceholderAPI 插件!'
+    hook: '&6&lGlobalPrefix &8> &2已注册 PlaceholderAPI 变量!'
+    empty: '-'
+  command:
+    query:
+    - '&6命令帮助'
+    - '&a/gp query &4查看自己的称号情况'
+    update:
+    - '&a/gp update &7[player] [p|s] [text] &4设置称号'
+  query:
+    notfound: '&6&lGlobalPrefix &8> &7你没有称号哦'
+    found:
+    - '&6我的称号'
+    - '&a前缀: &f<prefix>'
+    - '&a后缀: &f<suffix>'
+  update:
+    empty: '&6&lGlobalPrefix &8> &4参数不全'
+    success:
+    - '&6称号已更新'
+    - '&a前缀: &f<prefix>'
+    - '&a后缀: &f<suffix>'
+  connection:
+    close: '&6&lGlobalPrefix &8> &4数据库连接已关闭, 请检查!'
