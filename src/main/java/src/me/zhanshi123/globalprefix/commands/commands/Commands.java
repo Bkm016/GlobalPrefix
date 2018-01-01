@@ -1,7 +1,11 @@
 package me.zhanshi123.globalprefix.commands.commands;
 
+import me.zhanshi123.globalprefix.commands.commands.subcommands.AddCommand;
+import me.zhanshi123.globalprefix.commands.commands.subcommands.DelCommand;
 import me.zhanshi123.globalprefix.commands.commands.subcommands.QueryCommand;
+import me.zhanshi123.globalprefix.commands.commands.subcommands.WareHouseCommand;
 import me.zhanshi123.globalprefix.commands.commands.subcommands.UpdateCommand;
+
 import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
@@ -22,6 +26,9 @@ public class Commands
         Bukkit.getPluginCommand("gp").setExecutor(new CommandsExecutor());
         commands.add(new QueryCommand());
         commands.add(new UpdateCommand());
+        commands.add(new AddCommand());
+        commands.add(new DelCommand());
+        commands.add(new WareHouseCommand());
         instance=this;
     }
 

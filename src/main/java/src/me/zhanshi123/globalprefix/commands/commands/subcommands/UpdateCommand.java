@@ -1,6 +1,5 @@
 package me.zhanshi123.globalprefix.commands.commands.subcommands;
 
-import me.zhanshi123.globalprefix.ConfigManager;
 import me.zhanshi123.globalprefix.Database;
 import me.zhanshi123.globalprefix.GlobalPrefix;
 import me.zhanshi123.globalprefix.cacher.PlayerData;
@@ -33,7 +32,7 @@ public class UpdateCommand extends SubCommand{
                 
                 PlayerData data;
                 try {
-                	data = Database.getInstance().getData(name);
+                	data = Database.getData(name);
                 }
                 catch (Exception e) {
                     sender.sendMessage(GlobalPrefix.getMessage("connection.close"));
@@ -56,7 +55,7 @@ public class UpdateCommand extends SubCommand{
                         data.setSuffix(value);
                     }
                 }
-                Database.getInstance().updateData(data);
+                Database.updateData(data);
                 
                 if (sender instanceof Player || GlobalPrefix.getInstance().getConfig().getBoolean("Settings.ConsoleUpdateFeedback")) {
                 	for (String message : GlobalPrefix.getMessageList("update.success")) {

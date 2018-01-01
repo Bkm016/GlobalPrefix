@@ -40,7 +40,7 @@ public class Cacher {
             }
             else{
                 long time=System.currentTimeMillis();
-                PlayerData temp=Database.getInstance().getData(player);
+                PlayerData temp=Database.getData(player);
                 playerData=temp;
                 playerData.setCachedTime(time);
                 add(player,playerData,time);
@@ -49,7 +49,7 @@ public class Cacher {
         }
         else{
             long time=System.currentTimeMillis();
-            PlayerData temp=Database.getInstance().getData(player);
+            PlayerData temp=Database.getData(player);
             playerData=temp;
             playerData.setCachedTime(time);
             add(player,playerData,time);

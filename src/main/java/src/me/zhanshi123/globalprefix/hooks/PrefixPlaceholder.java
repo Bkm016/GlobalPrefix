@@ -26,10 +26,10 @@ public class PrefixPlaceholder extends EZPlaceholderHook{
 	            return GlobalPrefix.getSuffix(Cacher.getInstance().get(name)).replace("&","¡ì");
 	        }
 	        else if(s.equalsIgnoreCase("prefix")){
-	            return GlobalPrefix.getPrefix(Database.getInstance().getData(name)).replace("&","¡ì");
+	            return GlobalPrefix.getPrefix(Database.getData(name)).replace("&","¡ì");
 	        }
 	        else if(s.equalsIgnoreCase("suffix")){
-	            return GlobalPrefix.getSuffix(Database.getInstance().getData(name)).replace("&","¡ì");
+	            return GlobalPrefix.getSuffix(Database.getData(name)).replace("&","¡ì");
 	        }
 	        else {
 	            return null;

@@ -23,7 +23,7 @@ public class QueryCommand extends SubCommand{
             
             PlayerData data;
             try {
-            	data = Database.getInstance().getData(name);
+            	data = Database.getData(name);
             }
             catch (Exception e) {
                 sender.sendMessage(GlobalPrefix.getMessage("connection.close"));

@@ -31,6 +31,12 @@ public class CommandsExecutor implements CommandExecutor
         	for (String message : GlobalPrefix.getMessageList("command.update")) {
         		sender.sendMessage(message);
         	}
+        	for (String message : GlobalPrefix.getMessageList("command.add")) {
+        		sender.sendMessage(message);
+        	}
+        	for (String message : GlobalPrefix.getMessageList("command.del")) {
+        		sender.sendMessage(message);
+        	}
         }
     }
 }
