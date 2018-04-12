@@ -35,6 +35,9 @@ public class Database {
     }
     
     public static void updateData(PlayerData data){
+    	if (isEmpty(data.getPrefix()) && isEmpty(data.getSuffix())) {
+    		return;
+    	}
     	new BukkitRunnable() {
 			
 			@Override
@@ -48,5 +51,9 @@ public class Database {
 				}
 			}
 		}.runTaskAsynchronously(GlobalPrefix.getInstance());
+    }
+    
+    private static boolean isEmpty(String string) {
+    	return string == null || string.isEmpty();
     }
 }

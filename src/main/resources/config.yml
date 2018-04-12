@@ -14,6 +14,7 @@ Settings:
     next: '&7下一页'
     back: '&7上一页'
     useing: ' &a[使用中]'
+    default: '&7无'
     item:
       type: PAPER
       data: 0
@@ -21,13 +22,6 @@ Settings:
       lore:
       - ''
       - '&8&o点击切换为该称号'
-    empty:
-      type: WOOL
-      data: 14
-      name: '&4空'
-      lore:
-      - ''
-      - '&8&o尚未获得任何称号'
 
 Messages:
   loaded: '&6&lGlobalPrefix &8> &a插件已载入'

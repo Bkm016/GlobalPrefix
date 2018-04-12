@@ -48,4 +48,8 @@ public class ConfigManager {
     public String getNoData(){
         return GlobalPrefix.getMessage("placeholder.empty");
     }
+    
+    public String getWareHouseEmptyTag() {
+    	return GlobalPrefix.getInstance().getConfig().getString("Settings.WareHouse.default").replace("&", "¡ì");
+    }
 }

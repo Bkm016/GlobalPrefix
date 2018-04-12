@@ -17,7 +17,8 @@ public class CommandsExecutor implements CommandExecutor
             String arg = args[0];
             SubCommand subCommand=Commands.getInstance().getSubCommand(arg);
             if(subCommand == null)  {
-                subCommand = Commands.getInstance().getSubCommand("*");
+            	sendHelp(commandSender);
+            	return false;
             }
             return subCommand.onCommand(commandSender, command, label, args);
         }

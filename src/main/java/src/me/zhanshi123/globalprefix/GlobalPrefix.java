@@ -81,6 +81,7 @@ public class GlobalPrefix extends JavaPlugin {
     @Override
     public void onEnable() {
     	plugin = this;
+    	saveDefaultConfig();
         
         if (Bukkit.getPluginManager().getPlugin("TabooLib") == null) {
 			Bukkit.getConsoleSender().sendMessage("§4[TabooLib - Version] §c缺少禁忌书库, 插件已关闭");

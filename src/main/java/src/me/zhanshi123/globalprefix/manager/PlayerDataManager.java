@@ -20,6 +20,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.skymc.taboolib.inventory.InventoryUtil;
+import me.skymc.taboolib.sound.SoundPack;
+import me.zhanshi123.globalprefix.ConfigManager;
 import me.zhanshi123.globalprefix.Database;
 import me.zhanshi123.globalprefix.GlobalPrefix;
 import me.zhanshi123.globalprefix.cacher.PlayerData;
@@ -129,13 +131,23 @@ public class PlayerDataManager implements Listener {
 		WareHouseInventory holder = new WareHouseInventory(page, type);
 		Inventory inv = Bukkit.createInventory(holder, 54, GlobalPrefix.getMessage("warehouse.title-" + type.name().toLowerCase()));
 		
-		player.sendMessage(GlobalPrefix.getMessage("warehouse.messages.loading"));
+		if (!(player.getOpenInventory().getTopInventory().getHolder() instanceof WareHouseInventory)) {
+			player.sendMessage(GlobalPrefix.getMessage("warehouse.messages.loading"));
+		}
+		
 		new BukkitRunnable() {
+			
+			private boolean isEmptyTag(String name, PlayerData data) {
+				return name.equals(ConfigManager.getInstance().getWareHouseEmptyTag()) 
+						&& ((type == VariableType.PREFIX ? data.getPrefix() : data.getSuffix()) == null || (type == VariableType.PREFIX ? data.getPrefix() : data.getSuffix()).isEmpty());
+			}
 			
 			@Override
 			public void run() {
 				ConfigurationSection conf = GlobalPrefix.getInstance().getConfig().getConfigurationSection("Settings.WareHouse");
+				
 				List<String> list = getVariables(player.getName(), type);
+				list.add(0, ConfigManager.getInstance().getWareHouseEmptyTag());
 				
 				PlayerData data;
 				try {
@@ -155,10 +167,10 @@ public class PlayerDataManager implements Listener {
 						if (loop < page * 28) {
 							String append = "";
 							if (data != null) {
-								if (type == VariableType.PREFIX && name.equals(data.getPrefix())) {
+								if (type == VariableType.PREFIX && (name.equals(data.getPrefix()) || isEmptyTag(name, data))) {
 									append = conf.getString("useing");
 								}
-								else if (type == VariableType.SUFFIX && name.equals(data.getSuffix())) {
+								else if (type == VariableType.SUFFIX && (name.equals(data.getSuffix()) || isEmptyTag(name, data))) {
 									append = conf.getString("useing");
 								}
 							}
@@ -185,18 +197,6 @@ public class PlayerDataManager implements Listener {
 						}
 					}
 					loop++;
-				}
-				
-				if (list.size() == 0) {
-					ItemStack item = new ItemStack(Material.valueOf(conf.getString("empty.type"))); {
-						item.setDurability((short) conf.getInt("empty.data"));
-						ItemMeta meta = item.getItemMeta();
-						meta.setDisplayName(conf.getString("empty.name")
-								.replace("&", "¡ì"));
-						meta.setLore(GlobalPrefix.coloredList(conf.getStringList("empty.lore")));
-						item.setItemMeta(meta);
-					}
-					inv.setItem(22, item);
 				}
 				
 				if (page > 1) {
@@ -228,7 +228,12 @@ public class PlayerDataManager implements Listener {
 					
 					@Override
 					public void run() {
-						player.sendMessage(GlobalPrefix.getMessage("warehouse.messages.loaded"));
+						if (!(player.getOpenInventory().getTopInventory().getHolder() instanceof WareHouseInventory)) {
+							new SoundPack("BLOCK_CHEST_OPEN-1-1").play(player);
+						}
+						if (!(player.getOpenInventory().getTopInventory().getHolder() instanceof WareHouseInventory)) {
+							player.sendMessage(GlobalPrefix.getMessage("warehouse.messages.loaded"));
+						}
 						player.openInventory(inv);
 					}
 				}.runTask(GlobalPrefix.getInstance());
@@ -280,11 +285,12 @@ public class PlayerDataManager implements Listener {
 				return;
 			}
 			
+			String value = holder.VARIABLE.get(e.getRawSlot());
 			if (holder.TYPE == VariableType.PREFIX) {
-				data.setPrefix(holder.VARIABLE.get(e.getRawSlot()));
+				data.setPrefix(value.equals(ConfigManager.getInstance().getWareHouseEmptyTag()) ? null : value);
 			}
 			else {
-				data.setSuffix(holder.VARIABLE.get(e.getRawSlot()));
+				data.setSuffix(value.equals(ConfigManager.getInstance().getWareHouseEmptyTag()) ? null : value);
 			}
 			
 			player.sendMessage(GlobalPrefix.getMessage("warehouse.messages.success").replace("<variable>", holder.VARIABLE.get(e.getRawSlot()).replace("&", "¡ì")));
