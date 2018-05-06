@@ -20,6 +20,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class GlobalPrefix extends JavaPlugin {
+
+    /**
+     * IDEA Git 更新测试
+     * 2018-5-6 23:32:44
+     */
+
     private static GlobalPrefix plugin;
     private static PlayerDataManager playerdatamanager;
 
