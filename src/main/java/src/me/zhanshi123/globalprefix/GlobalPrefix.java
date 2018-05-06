@@ -22,7 +22,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class GlobalPrefix extends JavaPlugin {
 
     /**
-     * IDEA Git 更新测试
+     * IDEA Git 更新测试 （GitHub Desktop 更新测试 2018-5-6 23:41:22）
      * 2018-5-6 23:32:44
      */
 
